@@ -1,0 +1,19 @@
+{
+  "name": "socket-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhanlt-ibl/socket-sample.git"
+  },
+  "author": "nhanlt-ibl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhanlt-ibl/socket-sample/issues"
+  },
+  "homepage": "https://github.com/nhanlt-ibl/socket-sample#readme"
+}
