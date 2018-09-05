@@ -29,7 +29,7 @@
       "src/setupTests.ts"
     ],
     "include": [
-      "./src/**/*"
+      "./src/**/*", "webpack.config.js"
     ],
     "types": [
       "typePatches"
