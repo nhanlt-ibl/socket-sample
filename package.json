@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/nhanlt-ibl/socket-sample/issues"
   },
-  "homepage": "https://github.com/nhanlt-ibl/socket-sample#readme"
+  "homepage": "https://github.com/nhanlt-ibl/socket-sample#readme",
+  "dependencies": {
+    "ts-loader": "^5.0.0",
+    "typescript": "^3.0.3",
+    "webpack": "^4.17.2",
+    "webpack-node-externals": "^1.7.2"
+  }
 }
