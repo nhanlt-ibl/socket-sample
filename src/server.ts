@@ -8,7 +8,6 @@ const io = socket(httpServer)
 io.of('/649').on('connection', (socket) => {
     console.log("client-connect", socket.id)
     socket.emit('asdfadf')
-    socket.on('')
 })
 io.of('/545').on('connection', (socket) => {
     console.log("client-connect", socket.id)
