@@ -86,6 +86,53 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/process/browser.js":
+/*!*****************************************!*\
+  !*** ./node_modules/process/browser.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// shim for using process in browser\nvar process = module.exports = {};\n// cached from whatever global is present so that test runners that stub it\n// don't break things.  But we need to wrap it in a try catch in case it is\n// wrapped in strict mode code which doesn't define any globals.  It's inside a\n// function because try/catches deoptimize in certain engines.\nvar cachedSetTimeout;\nvar cachedClearTimeout;\nfunction defaultSetTimout() {\n    throw new Error('setTimeout has not been defined');\n}\nfunction defaultClearTimeout() {\n    throw new Error('clearTimeout has not been defined');\n}\n(function () {\n    try {\n        if (typeof setTimeout === 'function') {\n            cachedSetTimeout = setTimeout;\n        }\n        else {\n            cachedSetTimeout = defaultSetTimout;\n        }\n    }\n    catch (e) {\n        cachedSetTimeout = defaultSetTimout;\n    }\n    try {\n        if (typeof clearTimeout === 'function') {\n            cachedClearTimeout = clearTimeout;\n        }\n        else {\n            cachedClearTimeout = defaultClearTimeout;\n        }\n    }\n    catch (e) {\n        cachedClearTimeout = defaultClearTimeout;\n    }\n}());\nfunction runTimeout(fun) {\n    if (cachedSetTimeout === setTimeout) {\n        //normal enviroments in sane situations\n        return setTimeout(fun, 0);\n    }\n    // if setTimeout wasn't available but was latter defined\n    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {\n        cachedSetTimeout = setTimeout;\n        return setTimeout(fun, 0);\n    }\n    try {\n        // when when somebody has screwed with setTimeout but no I.E. maddness\n        return cachedSetTimeout(fun, 0);\n    }\n    catch (e) {\n        try {\n            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally\n            return cachedSetTimeout.call(null, fun, 0);\n        }\n        catch (e) {\n            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error\n            return cachedSetTimeout.call(this, fun, 0);\n        }\n    }\n}\nfunction runClearTimeout(marker) {\n    if (cachedClearTimeout === clearTimeout) {\n        //normal enviroments in sane situations\n        return clearTimeout(marker);\n    }\n    // if clearTimeout wasn't available but was latter defined\n    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {\n        cachedClearTimeout = clearTimeout;\n        return clearTimeout(marker);\n    }\n    try {\n        // when when somebody has screwed with setTimeout but no I.E. maddness\n        return cachedClearTimeout(marker);\n    }\n    catch (e) {\n        try {\n            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally\n            return cachedClearTimeout.call(null, marker);\n        }\n        catch (e) {\n            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.\n            // Some versions of I.E. have different rules for clearTimeout vs setTimeout\n            return cachedClearTimeout.call(this, marker);\n        }\n    }\n}\nvar queue = [];\nvar draining = false;\nvar currentQueue;\nvar queueIndex = -1;\nfunction cleanUpNextTick() {\n    if (!draining || !currentQueue) {\n        return;\n    }\n    draining = false;\n    if (currentQueue.length) {\n        queue = currentQueue.concat(queue);\n    }\n    else {\n        queueIndex = -1;\n    }\n    if (queue.length) {\n        drainQueue();\n    }\n}\nfunction drainQueue() {\n    if (draining) {\n        return;\n    }\n    var timeout = runTimeout(cleanUpNextTick);\n    draining = true;\n    var len = queue.length;\n    while (len) {\n        currentQueue = queue;\n        queue = [];\n        while (++queueIndex < len) {\n            if (currentQueue) {\n                currentQueue[queueIndex].run();\n            }\n        }\n        queueIndex = -1;\n        len = queue.length;\n    }\n    currentQueue = null;\n    draining = false;\n    runClearTimeout(timeout);\n}\nprocess.nextTick = function (fun) {\n    var args = new Array(arguments.length - 1);\n    if (arguments.length > 1) {\n        for (var i = 1; i < arguments.length; i++) {\n            args[i - 1] = arguments[i];\n        }\n    }\n    queue.push(new Item(fun, args));\n    if (queue.length === 1 && !draining) {\n        runTimeout(drainQueue);\n    }\n};\n// v8 likes predictible objects\nfunction Item(fun, array) {\n    this.fun = fun;\n    this.array = array;\n}\nItem.prototype.run = function () {\n    this.fun.apply(null, this.array);\n};\nprocess.title = 'browser';\nprocess.browser = true;\nprocess.env = {};\nprocess.argv = [];\nprocess.version = ''; // empty string to avoid regexp issues\nprocess.versions = {};\nfunction noop() { }\nprocess.on = noop;\nprocess.addListener = noop;\nprocess.once = noop;\nprocess.off = noop;\nprocess.removeListener = noop;\nprocess.removeAllListeners = noop;\nprocess.emit = noop;\nprocess.prependListener = noop;\nprocess.prependOnceListener = noop;\nprocess.listeners = function (name) { return []; };\nprocess.binding = function (name) {\n    throw new Error('process.binding is not supported');\n};\nprocess.cwd = function () { return '/'; };\nprocess.chdir = function (dir) {\n    throw new Error('process.chdir is not supported');\n};\nprocess.umask = function () { return 0; };\n\n\n//# sourceURL=webpack:///./node_modules/process/browser.js?");
+
+/***/ }),
+
+/***/ "./src/Base/BaseServer.ts":
+/*!********************************!*\
+  !*** ./src/Base/BaseServer.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("/* WEBPACK VAR INJECTION */(function(process) {\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar http_1 = __webpack_require__(/*! http */ \"http\");\nvar express = __webpack_require__(/*! express */ \"express\");\nvar socketIo = __webpack_require__(/*! socket.io */ \"socket.io\");\nvar _649_1 = __webpack_require__(/*! ../Handlers/649 */ \"./src/Handlers/649/index.ts\");\nvar Controller_1 = __webpack_require__(/*! ../Controller */ \"./src/Controller/index.ts\");\nvar BaseApp = /** @class */ (function () {\n    function BaseApp() {\n        this.initConfig();\n        this.createApp();\n        this.createServer();\n        this.createIo();\n        this.startService();\n    }\n    BaseApp.prototype.initConfig = function () {\n        this.port = process.env.PORT || BaseApp.PORT;\n    };\n    BaseApp.prototype.createApp = function () {\n        this.app = express();\n        new Controller_1.default(this.app);\n    };\n    BaseApp.prototype.createServer = function () {\n        this.server = http_1.createServer(this.app);\n    };\n    BaseApp.prototype.createIo = function () {\n        this.io = socketIo(this.server);\n        new _649_1.default(this.io);\n    };\n    BaseApp.prototype.startService = function () {\n        var _this = this;\n        this.server.listen(this.port, function (res, err) {\n            console.log(\"SERVER IS RUNNING ON \" + _this.port);\n        });\n    };\n    BaseApp.PORT = 3000;\n    BaseApp.DOMAIN = 'http://localhost:3000';\n    return BaseApp;\n}());\nexports.default = BaseApp;\n\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/process/browser.js */ \"./node_modules/process/browser.js\")))\n\n//# sourceURL=webpack:///./src/Base/BaseServer.ts?");
+
+/***/ }),
+
+/***/ "./src/Controller/index.ts":
+/*!*********************************!*\
+  !*** ./src/Controller/index.ts ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Root = /** @class */ (function () {\n    function Root(serverInstance) {\n        this.helloWorld = function (req, res, next) {\n            res.send('hello world');\n        };\n        this.server = serverInstance;\n        this.server.get('/', this.helloWorld);\n    }\n    return Root;\n}());\nexports.default = Root;\n\n\n//# sourceURL=webpack:///./src/Controller/index.ts?");
+
+/***/ }),
+
+/***/ "./src/Handlers/649/index.ts":
+/*!***********************************!*\
+  !*** ./src/Handlers/649/index.ts ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar HandleEvents = /** @class */ (function () {\n    function HandleEvents(socketInstance) {\n        var _this = this;\n        this.onDisconnect = function (client) {\n            client.on(\"disconnect\", function (reason) {\n                console.log(\"client-disconnect\", reason);\n            });\n        };\n        this.io = socketInstance;\n        this.io.of(\"/\" + HandleEvents.game).on(\"connect\", function (client) {\n            _this.onDisconnect(client);\n        });\n    }\n    HandleEvents.game = \"649\";\n    return HandleEvents;\n}());\nexports.default = HandleEvents;\n\n\n//# sourceURL=webpack:///./src/Handlers/649/index.ts?");
+
+/***/ }),
+
 /***/ "./src/server.ts":
 /*!***********************!*\
   !*** ./src/server.ts ***!
@@ -94,7 +141,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar express = __webpack_require__(/*! express */ \"express\");\nvar http_1 = __webpack_require__(/*! http */ \"http\");\nvar socket = __webpack_require__(/*! socket.io */ \"socket.io\");\nvar app = express();\nvar httpServer = new http_1.Server(app);\nvar io = socket(httpServer);\nio.of('/649').on('connection', function (socket) {\n    console.log(\"client-connect\", socket.id);\n    socket.emit('asdfadf');\n});\nio.of('/545').on('connection', function (socket) {\n    console.log(\"client-connect\", socket.id);\n});\napp.get('/', function (req, res) {\n    res.send(\"\\n        <html lang = \\\"en\\\" >\\n        <head>\\n        <meta charset=\\\"UTF-8\\\" >\\n        <meta name=\\\"viewport\\\" content = \\\"width=device-width, initial-scale=1.0\\\" >\\n        <meta http - equiv=\\\"X-UA-Compatible\\\" content = \\\"ie=edge\\\" >\\n        <script src=\\\"/socket.io/socket.io.js\\\"></script>\\n        <title>Document </title>\\n        </head>\\n        <body>\\n        <script>\\n        var chat = io.connect('http://localhost:3000/649');\\n        </script>\\n        this is html page\\n        </body>\\n        </html>\");\n});\nhttpServer.listen(3000, function () {\n    console.log('listening on *:3000');\n});\n\n\n//# sourceURL=webpack:///./src/server.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar BaseServer_1 = __webpack_require__(/*! ./Base/BaseServer */ \"./src/Base/BaseServer.ts\");\nnew BaseServer_1.default();\n\n\n//# sourceURL=webpack:///./src/server.ts?");
 
 /***/ }),
 
