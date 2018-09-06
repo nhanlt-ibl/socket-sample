@@ -5,6 +5,7 @@ export default class HandleEvents {
   constructor(socketInstance: socketIo.Server) {
     this.io = socketInstance;
     this.io.of(`/${HandleEvents.game}`).on("connect", (client: any) => {
+      console.log("connectSuccess")
       this.onDisconnect(client);
     });
   }

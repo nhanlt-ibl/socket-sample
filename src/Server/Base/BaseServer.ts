@@ -14,6 +14,7 @@ export default class BaseApp {
   constructor(){
     this.initConfig()
     this.createApp()
+    this.createConfigMiddleWare()
     this.createServer()
     this.createIo()
     this.startService()
@@ -24,6 +25,9 @@ export default class BaseApp {
   private createApp(){
     this.app = express()
     new Controller649(this.app)
+  }
+  private createConfigMiddleWare(){
+    this.app.use(express.static("dist"));
   }
   private createServer(){
     this.server=createServer(this.app)

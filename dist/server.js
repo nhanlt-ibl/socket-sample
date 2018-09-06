@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/server.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/Server/Server.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -97,51 +97,51 @@ eval("// shim for using process in browser\nvar process = module.exports = {};\n
 
 /***/ }),
 
-/***/ "./src/Base/BaseServer.ts":
-/*!********************************!*\
-  !*** ./src/Base/BaseServer.ts ***!
-  \********************************/
+/***/ "./src/Server/Base/BaseServer.ts":
+/*!***************************************!*\
+  !*** ./src/Server/Base/BaseServer.ts ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/* WEBPACK VAR INJECTION */(function(process) {\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar http_1 = __webpack_require__(/*! http */ \"http\");\nvar express = __webpack_require__(/*! express */ \"express\");\nvar socketIo = __webpack_require__(/*! socket.io */ \"socket.io\");\nvar _649_1 = __webpack_require__(/*! ../Handlers/649 */ \"./src/Handlers/649/index.ts\");\nvar Controller_1 = __webpack_require__(/*! ../Controller */ \"./src/Controller/index.ts\");\nvar BaseApp = /** @class */ (function () {\n    function BaseApp() {\n        this.initConfig();\n        this.createApp();\n        this.createServer();\n        this.createIo();\n        this.startService();\n    }\n    BaseApp.prototype.initConfig = function () {\n        this.port = process.env.PORT || BaseApp.PORT;\n    };\n    BaseApp.prototype.createApp = function () {\n        this.app = express();\n        new Controller_1.default(this.app);\n    };\n    BaseApp.prototype.createServer = function () {\n        this.server = http_1.createServer(this.app);\n    };\n    BaseApp.prototype.createIo = function () {\n        this.io = socketIo(this.server);\n        new _649_1.default(this.io);\n    };\n    BaseApp.prototype.startService = function () {\n        var _this = this;\n        this.server.listen(this.port, function (res, err) {\n            console.log(\"SERVER IS RUNNING ON \" + _this.port);\n        });\n    };\n    BaseApp.PORT = 3000;\n    BaseApp.DOMAIN = 'http://localhost:3000';\n    return BaseApp;\n}());\nexports.default = BaseApp;\n\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/process/browser.js */ \"./node_modules/process/browser.js\")))\n\n//# sourceURL=webpack:///./src/Base/BaseServer.ts?");
+eval("/* WEBPACK VAR INJECTION */(function(process) {\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar http_1 = __webpack_require__(/*! http */ \"http\");\nvar express = __webpack_require__(/*! express */ \"express\");\nvar socketIo = __webpack_require__(/*! socket.io */ \"socket.io\");\nvar _649_1 = __webpack_require__(/*! ../Handlers/649 */ \"./src/Server/Handlers/649/index.ts\");\nvar Controller_1 = __webpack_require__(/*! ../Controller */ \"./src/Server/Controller/index.ts\");\nvar BaseApp = /** @class */ (function () {\n    function BaseApp() {\n        this.initConfig();\n        this.createApp();\n        this.createConfigMiddleWare();\n        this.createServer();\n        this.createIo();\n        this.startService();\n    }\n    BaseApp.prototype.initConfig = function () {\n        this.port = process.env.PORT || BaseApp.PORT;\n    };\n    BaseApp.prototype.createApp = function () {\n        this.app = express();\n        new Controller_1.default(this.app);\n    };\n    BaseApp.prototype.createConfigMiddleWare = function () {\n        this.app.use(express.static(\"dist\"));\n    };\n    BaseApp.prototype.createServer = function () {\n        this.server = http_1.createServer(this.app);\n    };\n    BaseApp.prototype.createIo = function () {\n        this.io = socketIo(this.server);\n        new _649_1.default(this.io);\n    };\n    BaseApp.prototype.startService = function () {\n        var _this = this;\n        this.server.listen(this.port, function (res, err) {\n            console.log(\"SERVER IS RUNNING ON \" + _this.port);\n        });\n    };\n    BaseApp.PORT = 3000;\n    BaseApp.DOMAIN = 'http://localhost:3000';\n    return BaseApp;\n}());\nexports.default = BaseApp;\n\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ \"./node_modules/process/browser.js\")))\n\n//# sourceURL=webpack:///./src/Server/Base/BaseServer.ts?");
 
 /***/ }),
 
-/***/ "./src/Controller/index.ts":
-/*!*********************************!*\
-  !*** ./src/Controller/index.ts ***!
-  \*********************************/
+/***/ "./src/Server/Controller/index.ts":
+/*!****************************************!*\
+  !*** ./src/Server/Controller/index.ts ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Root = /** @class */ (function () {\n    function Root(serverInstance) {\n        this.helloWorld = function (req, res, next) {\n            res.send('hello world');\n        };\n        this.server = serverInstance;\n        this.server.get('/', this.helloWorld);\n    }\n    return Root;\n}());\nexports.default = Root;\n\n\n//# sourceURL=webpack:///./src/Controller/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar renderHtml = function () { return \"\\n<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <meta http-equiv=\\\"X-UA-Compatible\\\" content=\\\"ie=edge\\\">\\n    <title>Document</title>\\n</head>\\n<body>\\n    <div id=\\\"root\\\"/>\\n    <script src=\\\"/browser.js\\\"></script>\\n</body>\\n</html>\\n\"; };\nvar Root = /** @class */ (function () {\n    function Root(serverInstance) {\n        this.helloWorld = function (req, res, next) {\n            res.send(renderHtml());\n        };\n        this.server = serverInstance;\n        this.server.get(\"/\", this.helloWorld);\n    }\n    return Root;\n}());\nexports.default = Root;\n\n\n//# sourceURL=webpack:///./src/Server/Controller/index.ts?");
 
 /***/ }),
 
-/***/ "./src/Handlers/649/index.ts":
-/*!***********************************!*\
-  !*** ./src/Handlers/649/index.ts ***!
-  \***********************************/
+/***/ "./src/Server/Handlers/649/index.ts":
+/*!******************************************!*\
+  !*** ./src/Server/Handlers/649/index.ts ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar HandleEvents = /** @class */ (function () {\n    function HandleEvents(socketInstance) {\n        var _this = this;\n        this.onDisconnect = function (client) {\n            client.on(\"disconnect\", function (reason) {\n                console.log(\"client-disconnect\", reason);\n            });\n        };\n        this.io = socketInstance;\n        this.io.of(\"/\" + HandleEvents.game).on(\"connect\", function (client) {\n            _this.onDisconnect(client);\n        });\n    }\n    HandleEvents.game = \"649\";\n    return HandleEvents;\n}());\nexports.default = HandleEvents;\n\n\n//# sourceURL=webpack:///./src/Handlers/649/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar HandleEvents = /** @class */ (function () {\n    function HandleEvents(socketInstance) {\n        var _this = this;\n        this.onDisconnect = function (client) {\n            client.on(\"disconnect\", function (reason) {\n                console.log(\"client-disconnect\", reason);\n            });\n        };\n        this.io = socketInstance;\n        this.io.of(\"/\" + HandleEvents.game).on(\"connect\", function (client) {\n            console.log(\"connectSuccess\");\n            _this.onDisconnect(client);\n        });\n    }\n    HandleEvents.game = \"649\";\n    return HandleEvents;\n}());\nexports.default = HandleEvents;\n\n\n//# sourceURL=webpack:///./src/Server/Handlers/649/index.ts?");
 
 /***/ }),
 
-/***/ "./src/server.ts":
-/*!***********************!*\
-  !*** ./src/server.ts ***!
-  \***********************/
+/***/ "./src/Server/Server.ts":
+/*!******************************!*\
+  !*** ./src/Server/Server.ts ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar BaseServer_1 = __webpack_require__(/*! ./Base/BaseServer */ \"./src/Base/BaseServer.ts\");\nnew BaseServer_1.default();\n\n\n//# sourceURL=webpack:///./src/server.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar BaseServer_1 = __webpack_require__(/*! ./Base/BaseServer */ \"./src/Server/Base/BaseServer.ts\");\nnew BaseServer_1.default();\n\n\n//# sourceURL=webpack:///./src/Server/Server.ts?");
 
 /***/ }),
 

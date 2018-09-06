@@ -1,25 +1,46 @@
-const nodeExternals = require('webpack-node-externals')
-const webpack = require('webpack')
+const nodeExternals = require("webpack-node-externals");
+const webpack = require("webpack");
 
-module.exports={
-    entry:{
-        server:'./src/server.ts'
+module.exports = [
+  {
+    entry: {
+      server: "./src/Server/Server.ts"
     },
-    output:{
-        path:__dirname+'/dist',
-        filename:'[name].js'
+    output: {
+      path: __dirname + "/dist",
+      filename: "[name].js"
     },
-    resolve:{
-        extensions:['.ts','.js','.json']
+    resolve: {
+      extensions: [".ts", ".js", ".json"]
     },
-    module:{
-        rules:[
-            {
-                test:/\.(ts|js)?$/,
-                loader:'ts-loader'
-            }
-        ]
+    module: {
+      rules: [
+        {
+          test: /\.(ts|js)?$/,
+          loader: "ts-loader"
+        }
+      ]
     },
-    externals:[nodeExternals()]
-
-}
+    externals: [nodeExternals()]
+  },
+  {
+    entry: {
+      browser: "./src/Client/Client.tsx"
+    },
+    output: {
+      path: __dirname + "/dist",
+      filename: "[name].js"
+    },
+    resolve: {
+      extensions: [".ts", ".js", ".json", ".tsx"]
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: "ts-loader"
+        }
+      ]
+    }
+  }
+];
