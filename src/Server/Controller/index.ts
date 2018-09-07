@@ -6,6 +6,7 @@ const renderHtml = () => `
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <head><link rel="stylesheet" href="https://unpkg.com/react-md@1.5.0/dist/react-md.indigo-pink.min.css"></head>
     <title>Document</title>
 </head>
 <body>
@@ -19,8 +20,12 @@ export default class Root {
   constructor(serverInstance: express.Application) {
     this.server = serverInstance;
     this.server.get("/", this.helloWorld);
+    this.server.post("/file",this.handleClientFile)
   }
   private helloWorld = (req, res, next) => {
     res.send(renderHtml());
   };
+  private handleClientFile=(req,res,next)=>{
+
+  }
 }

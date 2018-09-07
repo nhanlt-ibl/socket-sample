@@ -30,7 +30,7 @@
     "src/setupTests.ts"
   ],
   "include": [
-    "./src/**/*.ts", "webpack.config.js", "src/Client/Client.tsx"
+    "./src/**/*.ts", "webpack.config.js", "src/Client/Client.tsx", "src/Client/Src/Features/EventList/index.tsx"
   ],
   "types": [
     "typePatches",
