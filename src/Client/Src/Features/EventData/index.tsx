@@ -1,35 +1,31 @@
 import * as React from 'react';
-// import * as XLSX from 'xlsx';
+import { Events, Data } from '../../../../Sample/ListEvents'
+import EventItem from './item'
 interface IAppProps {
-  data:any
+  data: any
 }
 
-interface IAppState{
-  input_file:any
+interface IAppState {
+  input_file: any
 }
-export default class App extends React.Component<IAppProps,IAppState>{
-  constructor(props){
-    super(props)
-    this.state={
-      input_file:null
-    }
-  }
-  onInputChange=(e)=>{
-
-    console.log("e",e.target.files[0])
-    const reader = new FileReader()
-    reader.onload=(e:any)=>{
-      console.log("onload",e.target.result)
-    }
-    reader.readAsText(e.target.files[0])
-    this.setState({
-      input_file:e
-    })
-  }
-  render(){
-    console.log("this.state.file",this.state.input_file)
-    return(
-      <input type="file"onChange={this.onInputChange}/>
+export default class App extends React.Component<IAppProps, IAppState>{
+  render() {
+    return (
+      <div>
+        {
+          (() => {
+            let results: any = []
+            let index = 1
+            Object.keys(Events).forEach(element => {
+              const result = (Events[element].map((event) => {
+                return <EventItem key={index++} name={event} src={Data[event]} />
+              }))
+              results = [...results, ...result]
+            });
+            return results
+          })()
+        }
+      </div>
     )
   }
 }
