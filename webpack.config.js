@@ -1,8 +1,8 @@
+require('dotenv').config()
 const nodeExternals = require("webpack-node-externals");
 const webpack = require("webpack");
 
-module.exports = [
-  {
+module.exports = [{
     entry: {
       server: "./src/Server/Server.ts"
     },
@@ -14,12 +14,10 @@ module.exports = [
       extensions: [".ts", ".js", ".json"]
     },
     module: {
-      rules: [
-        {
-          test: /\.(ts|js)?$/,
-          loader: "ts-loader"
-        }
-      ]
+      rules: [{
+        test: /\.(ts|js)?$/,
+        loader: "ts-loader"
+      }]
     },
     externals: [nodeExternals()]
   },
@@ -35,12 +33,17 @@ module.exports = [
       extensions: [".ts", ".js", ".json", ".tsx"]
     },
     module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          loader: "ts-loader"
+      rules: [{
+        test: /\.tsx?$/,
+        loader: "ts-loader"
+      }]
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          SOCKET_SERVER: JSON.stringify(process.env.SOCKET_SERVER)
         }
-      ]
-    }
+      })
+    ]
   }
 ];

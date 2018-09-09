@@ -24,6 +24,7 @@ export const Events = {
 }
 export const Data = {
   "StopSellingInEmergency": {
+    event: "StopSellingInEmergency",
     args: {
       drawFrom: '10',
       drawTo: '16',
@@ -33,6 +34,7 @@ export const Data = {
     },
   },
   "StartSelling": {
+    event: "StartSelling",
     args: {
       drawFrom: '10',
       drawTo: '16',
@@ -42,6 +44,7 @@ export const Data = {
     },
   },
   "ErrorStartInSelling": {
+    event: "ErrorStartInSelling",
     args: {
       drawFrom: '10',
       drawTo: '16',
@@ -51,6 +54,7 @@ export const Data = {
     },
   },
   "ErrorHasNotSellingTime": {
+    event: "ErrorHasNotSellingTime",
     args: {
       drawFrom: '10',
       drawTo: '16',
@@ -60,6 +64,7 @@ export const Data = {
     },
   },
   "CalculateJackpot": {
+    event: "CalculateJackpot",
     args: {
       drawFrom: '10',
       drawTo: '16',
@@ -76,6 +81,7 @@ export const Data = {
     },
   },
   "PauseSelling": {
+    event: "PauseSelling",
     args: {
       drawFrom: '10',
       drawTo: '16',
@@ -85,6 +91,7 @@ export const Data = {
     },
   },
   "MoveTotalSales": {
+    event: "MoveTotalSales",
     args: {
       drawFrom: '10',
       drawTo: '16',
@@ -94,6 +101,7 @@ export const Data = {
     }
   },
   "MoveFundInEmergency": {
+    event: "MoveFundInEmergency",
     args: {
       drawFrom: '10',
       drawTo: '16',

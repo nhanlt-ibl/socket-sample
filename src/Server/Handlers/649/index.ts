@@ -7,6 +7,7 @@ export default class HandleEvents {
     this.io.of(`/${HandleEvents.game}`).on("connect", (client: any) => {
       console.log("connectSuccess")
       this.onDisconnect(client);
+      this.sendFactory('NEW_EVENT', client)
     });
   }
   private onDisconnect = (client: any) => {
@@ -14,4 +15,10 @@ export default class HandleEvents {
       console.log("client-disconnect", reason);
     });
   };
+  private sendFactory = (event: string, client: any) => {
+    client.on(event, (data) => {
+      console.log("new_event", data)
+      client.broadcast.emit(event, data)
+    })
+  }
 }

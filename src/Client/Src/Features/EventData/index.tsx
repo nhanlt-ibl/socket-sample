@@ -3,6 +3,8 @@ import { Events, Data } from '../../../../Sample/ListEvents'
 import EventItem from './item'
 interface IAppProps {
   data: any
+  addToast: (event) => void
+  connected: boolean
 }
 
 interface IAppState {
@@ -18,7 +20,7 @@ export default class App extends React.Component<IAppProps, IAppState>{
             let index = 1
             Object.keys(Events).forEach(element => {
               const result = (Events[element].map((event) => {
-                return <EventItem key={index++} name={event} src={Data[event]} />
+                return <EventItem addToast={() => this.props.addToast(event)} key={index++} name={event} src={Data[event]} />
               }))
               results = [...results, ...result]
             });
