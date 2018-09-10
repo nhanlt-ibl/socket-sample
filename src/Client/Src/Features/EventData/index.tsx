@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Events, Data } from '../../../../Sample/ListEvents'
 import EventItem from './item'
 interface IAppProps {
   data: any
+  editEvent: (data: any) => void
   addToast: (event) => void
   connected: boolean
 }
@@ -15,17 +15,14 @@ export default class App extends React.Component<IAppProps, IAppState>{
     return (
       <div>
         {
-          (() => {
-            let results: any = []
-            let index = 1
-            Object.keys(Events).forEach(element => {
-              const result = (Events[element].map((event) => {
-                return <EventItem addToast={() => this.props.addToast(event)} key={index++} name={event} src={Data[event]} />
-              }))
-              results = [...results, ...result]
-            });
-            return results
-          })()
+          Object.keys(this.props.data).map((item: string, index: number) => {
+            return <EventItem
+              addToast={() => this.props.addToast(event)}
+              key={index}
+              name={item}
+              editEvent={(data: any) => this.props.editEvent(data)}
+              src={this.props.data[item]} />
+          })
         }
       </div>
     )

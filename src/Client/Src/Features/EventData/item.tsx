@@ -4,7 +4,8 @@ import JSView from 'react-json-view'
 import { openSocket649 } from '../../'
 interface IAppProps {
     name: string;
-    src: any
+    src: any;
+    editEvent: (data: any) => void
     addToast: () => void
 }
 
@@ -21,7 +22,14 @@ class IApp extends React.Component<IAppProps, any> {
                         this.props.addToast()
                     }}
                 />
-                <JSView name={props.name} src={props.src} theme="ocean" />
+                <JSView
+                    name={props.name}
+                    src={props.src}
+                    theme="ocean"
+                    onEdit={(props) => {
+                        this.props.editEvent(props.updated_src)
+                    }}
+                />
             </div>
         );
     }

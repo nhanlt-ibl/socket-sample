@@ -5,6 +5,7 @@ import EventList from "./Features/EventList";
 import { Grid, Cell, Snackbar } from "react-md";
 import EventData from "./Features/EventData";
 import Socket649 from './Module/socket649';
+import { Data } from '../../Sample/ListEvents'
 export interface IAppProps { }
 interface IAppState {
   output: any;
@@ -16,7 +17,7 @@ export default class IApp extends React.Component<IAppProps, IAppState> {
   constructor(props) {
     super(props);
     this.state = {
-      output: {},
+      output: Data,
       toasts: [],
       connected: false,
     };
@@ -51,6 +52,14 @@ export default class IApp extends React.Component<IAppProps, IAppState> {
     })
 
   }
+  onEditEvent = (data: any) => {
+    let newOut = this.state.output
+    newOut[data.event] = data
+    this.setState({
+      ...this.state,
+      output: newOut
+    })
+  }
   public render() {
     const { connected } = this.state
     return (
@@ -70,6 +79,7 @@ export default class IApp extends React.Component<IAppProps, IAppState> {
                     data={output}
                     addToast={(event: string) => this.addToast(event)}
                     connected={connected}
+                    editEvent={(data: any) => this.onEditEvent(data)}
                   />
                 </Cell>
                 <Snackbar

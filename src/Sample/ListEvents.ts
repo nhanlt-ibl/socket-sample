@@ -26,51 +26,33 @@ export const Data = {
   "StopSellingInEmergency": {
     event: "StopSellingInEmergency",
     args: {
-      drawFrom: '10',
-      drawTo: '16',
-      participation: '0x000000000000000000000000000000000000000000000000000506070e121a21',
-      buyer: '0xdb92f3247a9098d017b281fefeaae0866755129a',
-      seller: '0xacdd5babfc0f518c64cc369537e7b87335909c9c'
+      draw: '2'
     },
   },
   "StartSelling": {
     event: "StartSelling",
     args: {
-      drawFrom: '10',
-      drawTo: '16',
-      participation: '0x000000000000000000000000000000000000000000000000000506070e121a21',
-      buyer: '0xdb92f3247a9098d017b281fefeaae0866755129a',
-      seller: '0xacdd5babfc0f518c64cc369537e7b87335909c9c'
+      draw: '2'
     },
   },
   "ErrorStartInSelling": {
     event: "ErrorStartInSelling",
     args: {
-      drawFrom: '10',
-      drawTo: '16',
-      participation: '0x000000000000000000000000000000000000000000000000000506070e121a21',
-      buyer: '0xdb92f3247a9098d017b281fefeaae0866755129a',
-      seller: '0xacdd5babfc0f518c64cc369537e7b87335909c9c'
+      draw: '2'
     },
   },
   "ErrorHasNotSellingTime": {
     event: "ErrorHasNotSellingTime",
     args: {
-      drawFrom: '10',
-      drawTo: '16',
-      participation: '0x000000000000000000000000000000000000000000000000000506070e121a21',
-      buyer: '0xdb92f3247a9098d017b281fefeaae0866755129a',
-      seller: '0xacdd5babfc0f518c64cc369537e7b87335909c9c'
+      draw: '2'
     },
   },
   "CalculateJackpot": {
     event: "CalculateJackpot",
     args: {
-      drawFrom: '10',
-      drawTo: '16',
-      participation: '0x000000000000000000000000000000000000000000000000000506070e121a21',
-      buyer: '0xdb92f3247a9098d017b281fefeaae0866755129a',
-      seller: '0xacdd5babfc0f518c64cc369537e7b87335909c9c'
+      draw: '5',
+      winningJackpotTotal: '0',
+      isFinish: false
     },
   },
   "ResumeSelling": {
@@ -83,11 +65,7 @@ export const Data = {
   "PauseSelling": {
     event: "PauseSelling",
     args: {
-      drawFrom: '10',
-      drawTo: '16',
-      participation: '0x000000000000000000000000000000000000000000000000000506070e121a21',
-      buyer: '0xdb92f3247a9098d017b281fefeaae0866755129a',
-      seller: '0xacdd5babfc0f518c64cc369537e7b87335909c9c'
+      draw: '2'
     },
   },
   "MoveTotalSales": {
