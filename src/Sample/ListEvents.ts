@@ -71,12 +71,12 @@ export const Data = {
   "MoveTotalSales": {
     event: "MoveTotalSales",
     args: {
-      drawFrom: '10',
-      drawTo: '16',
-      participation: '0x000000000000000000000000000000000000000000000000000506070e121a21',
-      buyer: '0xdb92f3247a9098d017b281fefeaae0866755129a',
-      seller: '0xacdd5babfc0f518c64cc369537e7b87335909c9c'
-    }
+      draw: '12',
+      prizeBalance: '7000000000000',
+      systemCostBalance: '3000000000000',
+      royaltyBalance: '100000000000',
+      randaoBountyBalance: '100000000000'
+    },
   },
   "MoveFundInEmergency": {
     event: "MoveFundInEmergency",
