@@ -19,8 +19,12 @@ export default class Root {
   private server: express.Application;
   constructor(serverInstance: express.Application) {
     this.server = serverInstance;
+    this.server.get("/socket", this.socketEvent);
     this.server.get("/lotto/api?game=lotto-5-45", this.drawInfo);
   }
+  private socketEvent = (req, res, next) => {
+    res.send(renderHtml());
+  };
   private moduleUser = (req, res, next) => {};
   private moduleDraw = (req, res, next) => {};
   private userAction = (action: string) => {
